@@ -11,7 +11,6 @@ export function LogoutButton() {
         navigate("/");
       }
     });
-    // localStorage.removeItem('jwt');
     
 
     }

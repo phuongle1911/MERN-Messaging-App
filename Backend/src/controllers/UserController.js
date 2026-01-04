@@ -118,18 +118,6 @@ router.get(
     
 });
 
-// GET and verify current user
-// router.get(
-//   "/me", verifyJwt, async (request, response, next) => {
-//     try {
-//       let currentUserId = request.authentication.id;
-//       let currentUser = await UserModel.findById(currentUserId);
-//       response.json({username: currentUser.username});
-//       next();
-//     } catch(error) {
-//       return next(new Error(error));
-//     }
-// });
 
 
 router.get("/me", verifyJwt, async (request, response, next) => {

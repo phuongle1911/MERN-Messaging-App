@@ -89,7 +89,7 @@ For MongoDB you can user a cloud database with MongoDB Atlas or if you wish to i
 #### 3 - Cloning the Repository to your local system
 Open the terminal and run:
 
-    git clone https://github.com/maxmoeller-147/MERN-Project.git
+    git clone https://github.com/phuongle1911/MERN-Messaging-App
 
 Once you have a local copy of the project. navigate into the project directory to install the packages and dependencies.
 
@@ -102,17 +102,35 @@ In the project directory terminal run:
 This will automatically download and install all the necessary packages and create a node_modules folder in your directory. If an error occur just delete the node_modules folder and package-lock.json files and run 'npm install' again.
 
 --------------------------
-#### 5 - Environment Configuration
-Database connection and authentification requires environment variables configuration. Create a file named '.env' in the project root directory and then you can copy this:
+#### 5 - Create database
+Create a database by running following command:
 
+````bash
+mongosh
+use your-database-name
+````
+
+If you would like to set up authentication for your database, follow steps in https://www.mongodb.com/docs/manual/tutorial/configure-scram-client-authentication/
+--------------------------
+#### 6 - Environment Configuration
+Database connection and authentification requires environment variables configuration. Create a file named '.env' in the project root directory. 
+
+If your database doesn't need authentication: 
+
+    NODE_ENV=development
     PORT=3000
-    MONGO_URI=mongodb://127.0.0.1:27017/DatingAppDatabase
+    DATABASE_URL=mongodb://127.0.0.1:27017/yourDatabase
     JWT_SECRET=your_secret_key
 
 This is a typical setting file. 
 
+If your database need authentication, change DATABASE_URL as below:
+
+    DATABASE_URL='mongodb://username:password@127.0.0.1:27017/yourDatabaseName?authSource=databaseNameWhereUserCreated'
+
+
 ---------------------------
-#### 6 - Run Application
+#### 7 - Run Application
 After all the prevoius steps are finished, the app is ready to start. 
     
     npm run dev
@@ -144,6 +162,6 @@ Please follow this style guide when you contribute to the project. This ensure c
 
 -----------------------
 ### Contributors:
-* Phoung(link:https://github.com/phuongle1911)
+* Phuong(link:https://github.com/phuongle1911)
 * Jack(link:https://github.com/x99y)
 * Max(link:https://github.com/maxmoeller-147)

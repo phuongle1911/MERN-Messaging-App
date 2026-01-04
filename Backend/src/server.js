@@ -63,10 +63,6 @@ const storage = multer.diskStorage({
 });
 
 
-// Route to send the chat html page
-app.get("/", (request,response) => {
-  response.sendFile(path.join(__dirname, "public", "index.html"));
-});
 
 
 // Start the server on port 3000
@@ -80,7 +76,7 @@ require('./sockets/websocket.js')(server);
 
 
 // Route to check MongoDB status
-app.get("/databaseHealth", (request, response) => {
+app.get("/api/databaseHealth", (request, response) => {
   let databaseState = mongoose.connection.readyState;
   let databaseName = mongoose.connection.name;
   let databaseModels = mongoose.connection.modelNames();
@@ -94,10 +90,10 @@ app.get("/databaseHealth", (request, response) => {
 })
 })
 
-app.use("/users", userController);
-app.use("/profiles", profileController);
-app.use("/connection", connectionController);
-app.use("/rooms", roomChatController);
+app.use("/api/users", userController);
+app.use("/api/profiles", profileController);
+app.use("/api/connection", connectionController);
+app.use("/api/rooms", roomChatController);
 
 
 // Error handler Middleware
@@ -109,10 +105,14 @@ app.use((error, request, response, next) => {
 
 
 // 404 route  
-app.all(/.*/, (request,response)=> {
-  response.status(404).json({ message: " Route not found in this API",
-  targetPath: request.path
+app.all('/api/*path', (request,response)=> {
+  response.status(404).json({ message: " Route not found in this API"
   })
+});
+
+// Route to send the chat html page
+app.get("*path", (request,response) => {
+  response.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 

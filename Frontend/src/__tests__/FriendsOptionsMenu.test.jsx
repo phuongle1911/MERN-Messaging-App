@@ -33,7 +33,7 @@ vi.mock("../api", () => ({
 
 
 describe("OptionMenu", () => {
-  const friend = {_id: "helloworld"};
+  const friend = {_id: "helloworld", connectionId: "123"};
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -98,7 +98,7 @@ describe("OptionMenu", () => {
         "Do you want to delete this user from your friends list?"
       );
 
-      expect(api.delete).toHaveBeenCalledWith("/connection/helloworld");
+      expect(api.delete).toHaveBeenCalledWith("/connection/123");
       expect(alert).toHaveBeenCalledWith("Friend Deleted");
       expect(window.location.reload).toHaveBeenCalledWith();
     });

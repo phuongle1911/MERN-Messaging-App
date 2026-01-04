@@ -14,7 +14,7 @@ describe("Users route works.", () => {
     jest.spyOn(UserModel, 'findOne').mockResolvedValue(false);
 
     let response = await request(app)
-      .post("/users/register")
+      .post("/api/users/register")
       .send(registerUser);
     expect(response.status).toEqual(200);
   });
@@ -28,7 +28,7 @@ describe("Users route works.", () => {
     }
     jest.spyOn(UserModel, 'findOne').mockResolvedValue(true);
     let response = await request(app)
-      .post("/users/login")
+      .post("/api/users/login")
       .send({
         email: "jack12@gmail.com",
         username: "jack12",

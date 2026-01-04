@@ -1,0 +1,40 @@
+services:
+  app-dev:
+    build: 
+      context: .
+      target: development
+    ports:
+      - '${VITE_PORT:-5173}:5173'
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./src:/app/src:ro
+      - ./vite.config.js:/app/vite.config.js:ro
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+          ignore:
+            - '**/*.test.*'
+            - '**/__tests__/**'
+        - action: rebuild
+          path: ./package.json
+        - action: sync
+          path: ./vite.config.js
+          target: /app/vite.config.js
+    restart: unless-stopped
+
+  # app-prod:
+  #   build: 
+  #     context: .
+  #     target: production
+  #   # ports:
+  #   #   - '${VITE_PORT:-5173}:8080'
+  #   environment:
+  #     NODE_ENV: production
+  #   restart: unless-stopped
+
+
+
+

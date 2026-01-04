@@ -80,14 +80,16 @@ After the installation is completed.
 To check the version and confirm it's been installed succesfully.
 
 -------------------------
-#### 2 - Install MongoDB
+#### 2 - Install MongoDB and Create Database
 For MongoDB you can user a cloud database with MongoDB Atlas or if you wish to install it locally you can download it from the MongoDB official website (link:https://www.mongodb.com/try/download/community).
+
+Create database as per instruction in /Backend/README.md
 
 -------------------------
 #### 3 - Cloning the Repository to your local system
 Open the terminal and run:
 
-    git clone https://github.com/maxmoeller-147/MERN-Project.git
+    git clone https://github.com/phuongle1911/MERN-Messaging-App
 
 Once you have a local copy of the project. navigate into the project directory to install the packages and dependencies.
 
@@ -108,15 +110,12 @@ In the project directory of frontend and backedn, run this in terminal:
 This will automatically download and install all the necessary packages and create a node_modules folder in your directory. 
 
 --------------------------
+
 #### 5 - Environment Configuration
 Database connection and authentification requires environment variables configuration. 
 In Backend folder, create a file named '.env' in the project root directory and then you can copy this:
 
-    PORT=3000
-    MONGO_URI=mongodb://127.0.0.1:27017/DatingAppDatabase
-    JWT_SECRET=your_secret_key
-
-This is a typical setting file. 
+    VITE_PORT=5173
 
 ---------------------------
 #### 6 - Run Application

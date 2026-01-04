@@ -1,0 +1,82 @@
+services:
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - '${DB_PORT:-27017}:27017'
+    healthcheck:
+      test: echo 'db.runCommand["ping"].ok' | mongosh localhost:27017/test --quiet
+    restart: unless-stopped
+    networks:
+      - messageapp-network
+  
+
+# development environment
+  app-dev:
+    build: 
+      context: .
+      target: development
+    container_name: backend-app-dev
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports: 
+      - '${PORT:-3000}:3000'
+    environment:
+      NODE_ENV: development
+      DOCKER_ENV: 'true'
+      MONGODB_HOST: mongodb
+      DATABASE_URL: "mongodb://mongodb:27017/DatingAppDatabase"
+    volumes:
+      - ./src:/app/src:ro
+    develop:
+      watch: 
+        - action: sync
+          path: ./src
+          target: /app/src
+          ignore: 
+            - '**/test/**'
+            - '**/*.test.*'
+        - action: rebuild
+          path: ./package.json
+    restart: unless-stopped
+    networks:
+      - messageapp-network
+
+  app-prod:
+    build:
+      context: ../
+      target: production
+      dockerfile: ./Backend/Dockerfile
+    container_name: message-app-prod
+    ports:
+      - '${PORT:-3000}:3000'
+    environment:
+      NODE_ENV: production
+      MONGODB_HOST: mongodb
+      DATABASE_URL: "mongodb://mongodb:27017/DatingAppDatabase"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    read_only: true
+    profiles:
+      - prod
+    networks:
+      - messageapp-network
+
+volumes:
+  mongo-data:
+    driver: local
+
+networks:
+  messageapp-network:
+    name: messageapp-network
+    driver: bridge
+
+
+
+
+
