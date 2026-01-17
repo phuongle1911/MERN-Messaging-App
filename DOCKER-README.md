@@ -27,7 +27,9 @@ The backend is an Express.js server responsible for receiving HTTP requests from
 MongoDB is used as the persistent data store for the application. It stores application data in collections (such as users, profiles) and relies on indexes for query performance and uniqueness constraints (e.g., unique email). Data is only created, read, updated, and deleted through the backend server. 
 
 Below is diagram showing authentication and authorisation workflow used in this app:
+
 ![App Authentication workflows](./images/AAD3%20(2).png)
+
 The diagram illustrates a JWT-based authentication and authorization flow designed for this app. A user begins by submitting login credentials, which the backend verifies against stored user data. If authentication fails, the process ends and access is denied. If authentication succeeds, the server issues a JWT and stores it in a secure httpOnly cookie, which the browser automatically includes in all subsequent requests. For each request to protected API endpoint, the backend checks the cookie, validate the JWT by checking if Jwt is in Blacklist, decoding Jwt and verify with users in the database. If this succeed, the backend will continue to determine whether the request is authorized. If the token is successfully validated and requests are authorised, the request proceeds and the backend returns the requested data; if not, the request is rejected and the flow terminates.
 
 When user logout, cookie will be cleared and current Jwt token will be saved in a Blacklist collection in database. This is where Jwt in request cookie will be checked againist to ensure that logout users are not authenticated and authorised for any requests to protected endpoint. 
@@ -35,7 +37,8 @@ When user logout, cookie will be cleared and current Jwt token will be saved in 
 
 ### Containerisation Architecture
 
-The app is containerised into development, testing and production environments. 
+The app is containerised using two separate containers: one for the backend and one for the frontend. Each container is configured with development, testing, and production environments.
+
 
 - Backend
   - Development environment: this environment is built from all files in /Backend folder. 
@@ -43,10 +46,10 @@ The app is containerised into development, testing and production environments.
     Inside the ```/Backend``` directory:
     the image is built by running following command:
     ````bash 
-    docker build --target development --tag backend-app-dev:v1 .
+    docker build --target development .
     ````
 
-    Run the container:
+    OR, Build and Run the container:
     ````bash
     docker compose up app-dev --build
     ````
@@ -73,15 +76,20 @@ The app is containerised into development, testing and production environments.
 
     Build image:
     ````bash 
-    docker build -f ./Backend/Dockerfile --target production --tag fullstack-app-prod:v1 .
+    docker build -f ./Backend/Dockerfile --target production .
     ````
 
-    Run the container:
+    OR, build and run the container:
     ````bash
     docker compose -f ./Backend/docker-compose.yaml up app-prod
     ````
 
     Production app will then be available at: "http://localhost:3000" 
+
+  - Stop container running:
+    ````bash
+    docker stop <container-name>
+    ````
 
 - Frontend: frontend containes development and testing environment only
   - Development environment: this environment is built from all files in /Frontend folder.
@@ -89,10 +97,10 @@ The app is containerised into development, testing and production environments.
     Inside the ```/Frontend``` directory:
     Build image:
     ````bash 
-    docker build --target development --tag frontend-app-dev:v1 .
+    docker build --target development .
     ````
 
-    Run the container:
+    OR, build and run the container:
     ````bash
     docker compose up app-dev --build
     ````
@@ -110,10 +118,36 @@ The app is containerised into development, testing and production environments.
     ````bash
     docker run -it frontend-app-test:v1
     ````
+  - Stop container running:
+    ````bash
+    docker stop <container-name>
+    ````
+
+- Push to container registry:
+Images for production environment is pushed to AWS ECR on IAM user, with access credentials being used in secure way, as below steps:
+  - Step 1: On AWS Cloud Console, create IAM user with access credentials and ECR permissions
+  - Step 2: Configure AWS CLI with access credentials:
+    ````bash
+    aws configure
+    ````
+    Then enter:
+    - Access Key ID
+    - Secret Access Key
+    - Region: ap-southeast-2
+    - Output: json
+  - Step 3: Create ECR repository on AWS Cloud Console
+  - Step 4: Log in AWS with IAM user, tag image and push image
+  ````bash
+  aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 163467641569.dkr.ecr.ap-southeast-2.amazonaws.com
+
+  docker tag message-app-prod:latest 163467641569.dkr.ecr.ap-southeast-2.amazonaws.com/message-app:latest
+
+  docker push 163467641569.dkr.ecr.ap-southeast-2.amazonaws.com/message-app:latest
+  ````
 
 ## Container Usage Guide
 
-The app container is avaible on AWS ECR private repository. Please contact me if you wish to get access to the docker container for contribution. AWS account is required. 
+The app container is available on AWS ECR private repository. Please contact me if you wish to get access to the docker container for contribution. AWS account is required. 
 
 When you get permission to my repository, follow below step to pull images from the repo:
 
@@ -138,3 +172,5 @@ Step 4: Pull images
 ```bash
 docker pull 163467641569.dkr.ecr.ap-southeast-2.amazonaws.com/message-app:latest
 ````
+
+Step 5: Create database, users and .env file. Refer to .env.example file for example of what is required. 

@@ -22,9 +22,9 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
-    plugins: {
-      react: react
-    },
+    "plugins": [
+      "react"
+    ],
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       "react/self-closing-comp": ["error", {
@@ -34,6 +34,7 @@ export default defineConfig([
       "react/prefer-es6-class": [0, "always"],
       "react/prefer-stateless-function": [1, { "ignorePureComponents": true }],
       "react/jsx-pascal-case": [2, { allowAllCaps: false, allowNamespace: false }],
+      "react/jsx-indent": [2,2],
       "react/jsx-closing-bracket-location": [1],
       "jsx-quotes": ["error", "prefer-double"],
       "react/jsx-tag-spacing": [2, { 
