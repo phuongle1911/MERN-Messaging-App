@@ -64,11 +64,9 @@ router.post(
   verifyBasicUserAuth,
   createJwt,
   async (request, response) => {
-    // response.header("Access-Control-Allow-Origin", "*");
 
     response.json({
 		  message:"login successfully!",
-      // jwt : request.authentication.jwt
   })
 });
 
