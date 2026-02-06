@@ -27,6 +27,9 @@ export default defineConfig([
     ],
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      "prefer-const":"warn",
+      "no-constant-binary-expression":"error",
+      "no-duplicate-imports":"error",
       "react/self-closing-comp": ["error", {
         "component": true,
         "html": true
