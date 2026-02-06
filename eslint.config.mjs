@@ -30,25 +30,7 @@ export default defineConfig([
       "prefer-const":"warn",
       "no-constant-binary-expression":"error",
       "no-duplicate-imports":"error",
-      "react/self-closing-comp": ["error", {
-        "component": true,
-        "html": true
-      }],
-      "react/prefer-es6-class": [0, "always"],
-      "react/prefer-stateless-function": [1, { "ignorePureComponents": true }],
-      "react/jsx-pascal-case": [2, { allowAllCaps: false, allowNamespace: false }],
-      "react/jsx-indent": [2,2],
-      "react/jsx-closing-bracket-location": [1],
-      "jsx-quotes": ["error", "prefer-double"],
-      "react/jsx-tag-spacing": [2, { 
-        "closingSlash": "never", 
-        "beforeSelfClosing": "always",
-        "afterOpening": "never",
-        "beforeClosing": "allow"}],
-      "react/jsx-boolean-value": ["off"],
-      "jsx-a11y/alt-text": [2, {
-            "elements": [ "img", "object", "area", "input[type=\"image\"]" ]}],
-      "react/jsx-wrap-multilines": [1]
+      "react/jsx-indent": [2,2]
     },
   },
 ])

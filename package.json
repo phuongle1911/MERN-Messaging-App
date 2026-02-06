@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/phuongle1911/MERN-Messaging-App#readme",
   "devDependencies": {
-    "eslint": "^9.39.2"
+    "eslint": "^9.39.2",
+    "eslint-plugin-react": "^7.37.5"
   }
 }
