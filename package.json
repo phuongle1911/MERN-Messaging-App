@@ -1,0 +1,22 @@
+{
+  "name": "mern-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phuongle1911/MERN-Messaging-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phuongle1911/MERN-Messaging-App/issues"
+  },
+  "homepage": "https://github.com/phuongle1911/MERN-Messaging-App#readme",
+  "devDependencies": {
+    "eslint": "^9.39.2"
+  }
+}
