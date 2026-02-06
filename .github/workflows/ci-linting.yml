@@ -1,6 +1,8 @@
 name: Linting code
 
-on: [pull-request]
+on:
+  pull_request:
+    types: [opened, reopened]
 
 jobs:
   eslint:
