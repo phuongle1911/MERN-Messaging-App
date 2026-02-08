@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 
-bla bla
+
 async function dbConnect() {
 	try {
 		let DB_NAME=process.env?.DB_NAME || "DatingAppDatabase";
