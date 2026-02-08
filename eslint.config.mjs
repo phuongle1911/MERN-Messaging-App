@@ -1,5 +1,5 @@
 import { defineConfig, globalIgnores } from 'eslint/config'
-import react from 'eslint-plugin-react'
+import react from "eslint-plugin-react"
 import js from '@eslint/js'
 import globals from 'globals';
 

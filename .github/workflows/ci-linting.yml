@@ -24,6 +24,9 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v6
+      - run: npm ci
+      - run: cd Backend/
+      - run: npm ci
       - uses: reviewdog/action-eslint@v1.34.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -42,6 +45,9 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v6
+      - run: npm ci
+      - run: cd Frontend/
+      - run: npm ci
       - uses: reviewdog/action-eslint@v1.34.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
