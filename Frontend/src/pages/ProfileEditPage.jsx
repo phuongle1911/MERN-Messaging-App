@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import api from "../api";
-import "../styles/ProfileEditPage.css"
+import "../styles/ProfileEditPage.css";
+import React from "react";
+
 
 export default function ProfileEditPage() {
 
@@ -78,29 +80,29 @@ export default function ProfileEditPage() {
   }, []);
 
 
-  return (
-    <main>
-      <div className="edit-profile" >
-        <h2>Create/ Edit Profile</h2>
-      <form>
-        <div className="user-field">
-          <p>Username: {profile.username}</p>
+    return (
+      <main>
+        <div className="edit-profile" >
+          <h2>Create/ Edit Profile</h2>
+          <form>
+            <div className="user-field">
+              <p>Username: {profile.username}</p>
+            </div>
+            <div className="user-field">
+              <p>Email: {profile.email}</p>
+            </div>
+            <div>
+              {error && <p>{error}</p>}
+              <label htmlFor="avatar">Profile image:</label>
+              <input type="file" id="avatar" name="image" accept="image/jpeg, image/png" onChange={onChangeInput}/>
+            </div>
+            <div>
+              <label htmlFor="description">Bio description:</label>
+              <input type="text" id="description" name="description" value={profile?.description} onChange={onChangeInput} />
+            </div>
+            <button type="submit" onClick={onSave}>Save</button>
+          </form>
         </div>
-        <div className="user-field">
-          <p>Email: {profile.email}</p>
-        </div>
-        <div>
-          {error && <p>{error}</p>}
-          <label htmlFor="avatar">Profile image:</label>
-          <input type="file" id="avatar" name="image" accept="image/jpeg, image/png" onChange={onChangeInput}/>
-        </div>
-        <div>
-          <label htmlFor="description">Bio description:</label>
-          <input type="text" id="description" name="description" value={profile?.description} onChange={onChangeInput} />
-        </div>
-        <button type="submit" onClick={onSave}>Save</button>
-      </form>
-      </div>
-    </main>
+      </main>
     )
   }

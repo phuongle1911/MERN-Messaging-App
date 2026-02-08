@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
+import React from "react";
 
 export default function UserRegisterForm({ setError }) {
 
@@ -78,7 +78,7 @@ export default function UserRegisterForm({ setError }) {
         </div>
 
         <div>
-           <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password:</label>
           <input type="text" id="password" name="password" onChange={onChangePassword} />
         </div>
 

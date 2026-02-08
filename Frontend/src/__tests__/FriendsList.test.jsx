@@ -2,6 +2,7 @@ import { FriendList } from "../components/FriendsList";
 import { describe, expect, test, vi } from "vitest";
 import { render, screen } from "@testing-library/react"
 import { FriendDataContext } from "../Contexts/FriendDataContext";
+import React from "react";
 
 vi.mock("../components/FriendList", () => ({
   FriendUser: ({ friend }) => (

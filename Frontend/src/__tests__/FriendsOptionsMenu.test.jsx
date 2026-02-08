@@ -2,7 +2,8 @@ import { FriendOptionsMenu } from "../components/FriendsOptionsMenu.jsx";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import api from "../api";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { data, MemoryRouter, useNavigate } from "react-router";
+import { MemoryRouter } from "react-router";
+import React from "react";
 
 
 

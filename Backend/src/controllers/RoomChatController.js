@@ -24,7 +24,7 @@ router.post('/',
   //Find the user creating the room
   const user = await UserModel.findById(userId).exec();
 
-  newRoomData = {...request.body};
+  let newRoomData = {...request.body};
 
   try {
     
@@ -49,12 +49,12 @@ router.post('/',
     }
 
     // check if the room for these users existed?
-    findRoom = await RoomChatModel.findOne({participants:participants});
+    let findRoom = await RoomChatModel.findOne({participants:participants});
     if (findRoom) {
       response.json(findRoom)
       next()
     } else {
-      newRoom = await RoomChatModel.create({
+      let newRoom = await RoomChatModel.create({
       name: newRoomData?.name,
       participants: participants,
       type: newRoomData.type
@@ -119,10 +119,11 @@ router.put('/:roomChatId',
   async  (request, response,next) => {
   try {
     let updateData = {...request.body};
-    updateRoom = await RoomChatModel.findByIdAndUpdate(request.params.roomChatId, updateData, {returnDocument: "after"}).exec()
+    let updateRoom = await RoomChatModel.findByIdAndUpdate(request.params.roomChatId, updateData, {returnDocument: "after"}).exec()
     await updateRoom.save();
     response.json(updateRoom);
     next();
+    // eslint-disable-next-line no-unused-vars
     } catch(error) {
       return next(new Error("Room not found!"));
     };
@@ -134,7 +135,7 @@ router.delete('/:roomChatId',
   canViewRoom,
   async  (request, response,next) => {
     try {
-      deleteRoom = await RoomChatModel.findByIdAndDelete(request.params.roomChatId).exec()
+      let deleteRoom = await RoomChatModel.findByIdAndDelete(request.params.roomChatId).exec()
       if (deleteRoom) {
       response.json({
         message: 'Room is deleted successfully',

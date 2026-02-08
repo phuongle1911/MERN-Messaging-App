@@ -81,14 +81,15 @@ router.put(
   "/:targetUserId", 
   verifyJwt,
   async (request, response,next) => {
-    requestUserId = request.authentication.id;
+    let requestUserId = request.authentication.id;
     if (requestUserId === request.params.targetUserId) {
       try {
         let updateData = {...request.body};
-        updateUser = await UserModel.findByIdAndUpdate(request.params.targetUserId, updateData, {returnDocument: "after"}).exec()
+        let updateUser = await UserModel.findByIdAndUpdate(request.params.targetUserId, updateData, {returnDocument: "after"}).exec()
         await updateUser.save();
         response.json(updateUser);
         next();
+        // eslint-disable-next-line no-unused-vars
         } catch(error) {
           return next(new Error("User not found!"));
         }
@@ -139,10 +140,10 @@ router.get("/me", verifyJwt, async (request, response, next) => {
 router.delete(
   "/:targetUserId", verifyJwt,
   async (request, response,next) => {
-    requestUserId = request.authentication.id;
+    let requestUserId = request.authentication.id;
     if (requestUserId === request.params.targetUserId) {
       try {
-        deleteUser = await UserModel.findByIdAndDelete(request.params.targetUserId).exec()
+        let deleteUser = await UserModel.findByIdAndDelete(request.params.targetUserId).exec()
         await ProfileModel.findOneAndDelete({userId: request.params.targetUserId}).exec()
         if (deleteUser) {
         response.json({

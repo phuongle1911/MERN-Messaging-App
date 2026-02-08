@@ -6,7 +6,7 @@ const { UserModel } = require("../database/entities/User");
 describe("Users route works.", () => {
   it("Register route works ", async () => {
     // Spy on UserModel.findOne and mock its resolution
-    registerUser = {
+    let registerUser = {
       email: "abcd@gmail.com",
       username: "abcdef",
       password: "Abcd2335!"
@@ -21,7 +21,7 @@ describe("Users route works.", () => {
 
   it("Login route works ", async () => {
     // Spy on UserModel.findOne and mock its resolution
-    mockUser = {
+    let mockUser = {
       email: "jack12@gmail.com",
       username: "jack12",
       password: "Jack1234!"
@@ -29,11 +29,7 @@ describe("Users route works.", () => {
     jest.spyOn(UserModel, 'findOne').mockResolvedValue(true);
     let response = await request(app)
       .post("/api/users/login")
-      .send({
-        email: "jack12@gmail.com",
-        username: "jack12",
-        password: "Jack1234!"
-      });
+      .send(mockUser);
 
     expect(response.status).toEqual(200);
   });

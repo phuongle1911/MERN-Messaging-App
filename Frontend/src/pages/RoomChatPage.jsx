@@ -50,13 +50,13 @@ export default function RoomChatPage() {
     return (
       <main>
         <h1>Room chat</h1>
-          {/* Wait until socket is created */}
-          {socket ? (
-            <>
-              <UserJoiningRoom socket={socket} roomChatId={roomChatId} />
-              <RoomMessages socket={socket} />
-              <ChatForm socket={socket} roomChatId={roomChatId} />
-            </>
+        {/* Wait until socket is created */}
+        {socket ? (
+          <>
+            <UserJoiningRoom socket={socket} roomChatId={roomChatId} />
+            <RoomMessages socket={socket} />
+            <ChatForm socket={socket} roomChatId={roomChatId} />
+          </>
           ) : (
             //TODO animate this?
             <p>Connecting…</p>

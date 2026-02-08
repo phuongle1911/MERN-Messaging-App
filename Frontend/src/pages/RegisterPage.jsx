@@ -1,6 +1,8 @@
 import { useState } from "react";
 import UserRegisterForm from "../components/UserRegisterForm";
 import "../styles/LogInPage.css"
+import React from "react";
+
 
 export default function Register() {
 
@@ -9,15 +11,15 @@ export default function Register() {
   return (
     <main className="login-page">
       <section className="SignInForm">
-      <h1>Register user</h1>
+        <h1>Register user</h1>
 
-      {error && (
-        <p className="error" style={{ color: "red", marginBottom: "15px" }}>
-          {error}
-        </p>
-      )}
+        {error && (
+          <p className="error" style={{ color: "red", marginBottom: "15px" }}>
+            {error}
+          </p>
+        )}
 
-      <UserRegisterForm setError={setError}/>
+        <UserRegisterForm setError={setError}/>
       </section>
     </main>
   );

@@ -1,5 +1,4 @@
 const { default: mongoose } = require("mongoose");
-const validator = require("validator");
 
 let MessageSchema = new mongoose.Schema(
   {

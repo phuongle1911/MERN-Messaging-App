@@ -3,12 +3,12 @@ const { default: mongoose } = require("mongoose");
 
 async function dbConnect() {
 	try {
-		DB_NAME=process.env?.DB_NAME || "DatingAppDatabase";
-		DB_USER=process.env?.DB_USER;
-		DB_PASSWORD=process.env?.DB_PASSWORD;
-		MONGODB_HOST=process.env?.MONGODB_HOST || "127.0.0.1";
-		AUTH_SOURCE=process.env?.AUTH_SOURCE
-		DATABASE_URL=`mongodb://${DB_USER}:${DB_PASSWORD}@${MONGODB_HOST}:27017/${DB_NAME}?authSource=${AUTH_SOURCE}`;
+		let DB_NAME=process.env?.DB_NAME || "DatingAppDatabase";
+		let DB_USER=process.env?.DB_USER;
+		let DB_PASSWORD=process.env?.DB_PASSWORD;
+		let MONGODB_HOST=process.env?.MONGODB_HOST || "127.0.0.1";
+		let AUTH_SOURCE=process.env?.AUTH_SOURCE
+		let DATABASE_URL=`mongodb://${DB_USER}:${DB_PASSWORD}@${MONGODB_HOST}:27017/${DB_NAME}?authSource=${AUTH_SOURCE}`;
 
 		let targetDatabaseUrl;
 		if (!process.env || !DB_USER || !DB_PASSWORD) {

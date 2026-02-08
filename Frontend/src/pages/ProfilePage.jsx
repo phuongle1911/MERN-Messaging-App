@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router"
 import api from "../api";
 import '../styles/ProfilePage.css';
+import React from "react";
+
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -49,12 +51,12 @@ export default function ProfilePage() {
         <h3>Description</h3>
         <p>{ profile?.description }</p>
       </section>
-        {/* button only visible for user owning profile */}
-        {
-          !userIdParams &&
-          <button 
-          onClick = {handleRedirectToProfileEdit}>Edit</button>
-        }
+      {/* button only visible for user owning profile */}
+      {
+        !userIdParams &&
+        <button 
+        onClick = {handleRedirectToProfileEdit}>Edit</button>
+      }
     </main>
   )
 }

@@ -45,7 +45,7 @@ const storage = multer.diskStorage({
 const imageUpload = multer({storage: storage})
 
 router.patch('/edit', verifyJwt, imageUpload.single('image'), async (request, response, next) => {
-  imageFilename = request.file?.filename;
+  let imageFilename = request.file?.filename;
 
   try {
     const updateData = {...request.body, image: imageFilename};

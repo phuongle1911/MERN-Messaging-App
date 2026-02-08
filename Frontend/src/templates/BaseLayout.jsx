@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import { NavBar } from "../components/NavBar";
-import { LogoutButton } from "../components/LogoutBttm";
+import React from "react";
 
 // this layout changes depending on devices
 // this is layout for phone and tablet

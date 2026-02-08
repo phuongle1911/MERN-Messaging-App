@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import api from "../api"
 import { UserDisplay } from "../components/UsersDisplay";
 import { FriendDataContext } from "../Contexts/FriendDataContext";
@@ -30,13 +30,13 @@ export default function FriendSearchPage() {
   return (
     <main className="main-search">
       <div className="search-friends">
-      <h1>Connect with New Friends</h1>
-      {/* <input type="text" /> */}
-      <section>
-        {allOtherUsers.map((user) => 
-          <UserDisplay key={user.userId} username={user.username} userId={user.userId} isConnected={friendIdArray.includes(user.userId)} />
-        )}
-      </section>
+        <h1>Connect with New Friends</h1>
+        {/* <input type="text" /> */}
+        <section>
+          {allOtherUsers.map((user) => 
+            <UserDisplay key={user.userId} username={user.username} userId={user.userId} isConnected={friendIdArray.includes(user.userId)} />
+          )}
+        </section>
       </div>
     </main>
   )

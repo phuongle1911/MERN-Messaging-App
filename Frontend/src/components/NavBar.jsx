@@ -1,7 +1,7 @@
 import { useLocation, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { LogoutButton } from "./LogoutBttm";
-
+import React from "react";
 
 
 export function NavBar() {
@@ -17,13 +17,13 @@ export function NavBar() {
       onClick={() => setOpen (!open)}>
         ☰
       </button>
-    <nav className={`drop-menu ${open ? "open" : ""}`}>
-      <NavLink to="/home" onClick={() => setOpen(false)}>Home</NavLink>
-      <NavLink to="/profiles" onClick={() => setOpen(false)}>Profile</NavLink> 
-      <NavLink to="/friends/search" onClick={() => setOpen(false)}>Search</NavLink>
-      <NavLink to="/friends" end onClick={() => setOpen(false)}>Friends</NavLink>
-      <LogoutButton />
-    </nav>
+      <nav className={`drop-menu ${open ? "open" : ""}`}>
+        <NavLink to="/home" onClick={() => setOpen(false)}>Home</NavLink>
+        <NavLink to="/profiles" onClick={() => setOpen(false)}>Profile</NavLink> 
+        <NavLink to="/friends/search" onClick={() => setOpen(false)}>Search</NavLink>
+        <NavLink to="/friends" end onClick={() => setOpen(false)}>Friends</NavLink>
+        <LogoutButton />
+      </nav>
     </div>
   );
 }

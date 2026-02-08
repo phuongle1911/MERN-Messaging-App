@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FriendOptionsMenu } from "./FriendsOptionsMenu";
+import React from "react";
 
 export function FriendUser({ friend }) {
   const [open, setOpen] = useState(false);

@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { FriendUser } from "./FriendUser"
 import { FriendDataContext } from "../Contexts/FriendDataContext";
+import React from 'react';
 
 export function FriendList() {
   const friendsContext = useContext(FriendDataContext);
@@ -12,6 +13,7 @@ export function FriendList() {
     <section className='friends-list'>
       {
         friends.map(friend => (
+          // eslint-disable-next-line react/jsx-key
           <FriendUser friend={friend} />
         ))
       }

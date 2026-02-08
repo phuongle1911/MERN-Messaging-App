@@ -1,11 +1,12 @@
 import { useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router";
-
+import React from "react";
 
 
 export function FriendOptionsMenu ({ friend }) {
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const [roomId, setRoomId] = useState("")
   const handleUnfriend = async () => {
     if (!confirm("Do you want to delete this user from your friends list?"))
@@ -13,7 +14,7 @@ export function FriendOptionsMenu ({ friend }) {
     
 
     try {
-    await api.delete(`/connection/${friend.connectionId}`).then((response) => {
+    await api.delete(`/connection/${friend.connectionId}`).then(() => {
       })
       alert("Friend Deleted");
       window.location.reload();
@@ -43,17 +44,16 @@ export function FriendOptionsMenu ({ friend }) {
 
 return (
   <div className="drop-options">
-    
     <button onClick={() => navigate(`/profiles/${friend._id}`) }>
-        View Profile
+      View Profile
     </button>
 
     <button onClick={ joinRoom }>
-        Send Message
+      Send Message
     </button>
 
     <button onClick={handleUnfriend}>
-        Delete Friend
+      Delete Friend
     </button>
 
   </div>

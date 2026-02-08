@@ -10,7 +10,7 @@ router.post('/', verifyJwt, async (request, response,next) => {
 
   let newConnectionData = {...request.body};
   try {
-    newConnection = await ConnectionModel.create({
+    let newConnection = await ConnectionModel.create({
       userId: requestUserId,
       friendId: newConnectionData.friendId,
       connectionStatus: newConnectionData.connectionStatus,
@@ -30,7 +30,7 @@ router.delete('/:connectionId', verifyJwt, async (request, response,next) => {
   try {
    let deleteConnection = await ConnectionModel.findById(request.params.connectionId).exec();
    if (deleteConnection) {
-    isUserInConnection = (
+    let isUserInConnection = (
       (requestUserId === deleteConnection.userId.toString('utf8')) || (requestUserId === deleteConnection.friendId.toString('utf8'))
     );
     if (!isUserInConnection) {
@@ -47,6 +47,7 @@ router.delete('/:connectionId', verifyJwt, async (request, response,next) => {
   } else {
     return next(new Error("Connection not found!"))
    }
+  // eslint-disable-next-line no-unused-vars
   } catch(error) {
     return next(new Error("Connection id is not valid!"));
   }

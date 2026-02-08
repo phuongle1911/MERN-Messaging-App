@@ -26,7 +26,7 @@ module.exports = (server) => {
   //Using a map for fast lookup
   const connectedUsers = new Map();
 
-  function broadcastOnlineUsers() {
+  () => {
     const onlineList = Array.from(connectedUsers.keys());
     io.emit("onlineUsers", onlineList)
   }
@@ -209,7 +209,7 @@ module.exports = (server) => {
 
         console.log(`user ${userId} says ${msg}`)
 
-        const fullMessage = await MessageModel.create({
+        await MessageModel.create({
           roomId: roomId,
           senderId: userId,
           content: msg,
@@ -283,7 +283,7 @@ module.exports = (server) => {
         //Delete from the database?
         await MessageModel.findByIdAndDelete(msgId).exec()
       }catch(error){
-        console.log('Error handling chat message:', err);
+        console.log('Error handling chat message:', error);
       }
     });
 

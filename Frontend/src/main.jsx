@@ -1,4 +1,4 @@
-import { StrictMode } from "react"
+import React, { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage.jsx";
@@ -22,32 +22,32 @@ import "./index.css"
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-      <BrowserRouter>
+    <BrowserRouter>
 
-        <Routes>
-          <Route element={<BaseLayout />}>
+      <Routes>
+        <Route element={<BaseLayout />}>
 
-            <Route path="/" element={<WelcomePage />} />
-            <Route path="/users/login" element={<LogInPage />} />
-            <Route path="/users/register" element={<RegisterPage />} />
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/users/login" element={<LogInPage />} />
+          <Route path="/users/register" element={<RegisterPage />} />
 
-            <Route path="/home" element={<RoomDataProvider> <Homepage /> </RoomDataProvider>} />
-            <Route path="/friends" element={<FriendDataProvider><FriendsPage/></FriendDataProvider>} />
-            <Route path="/friends/search" element={<FriendDataProvider><FriendSearchPage/></FriendDataProvider>} />
-            <Route path="/profiles/" element={<ProfilePage />} />
-            <Route path="/profiles/:userId" element={<ProfilePage />} />
-            <Route path="/profiles/edit" element={<ProfileEditPage />} />
-            <Route path="/rooms/:roomChatId" element={<RoomChatPage />} />
-            
+          <Route path="/home" element={<RoomDataProvider> <Homepage /> </RoomDataProvider>} />
+          <Route path="/friends" element={<FriendDataProvider><FriendsPage/></FriendDataProvider>} />
+          <Route path="/friends/search" element={<FriendDataProvider><FriendSearchPage/></FriendDataProvider>} />
+          <Route path="/profiles/" element={<ProfilePage />} />
+          <Route path="/profiles/:userId" element={<ProfilePage />} />
+          <Route path="/profiles/edit" element={<ProfileEditPage />} />
+          <Route path="/rooms/:roomChatId" element={<RoomChatPage />} />
+          
 
-            <Route path="/404" element={<NotFoundPage />} />
-            
-            <Route path="*" element={<Navigate to="/404" replace />} />
+          <Route path="/404" element={<NotFoundPage />} />
+          
+          <Route path="*" element={<Navigate to="/404" replace />} />
 
-          </Route>
-        </Routes>
+        </Route>
+      </Routes>
 
-       </BrowserRouter>
+    </BrowserRouter>
 
 
 

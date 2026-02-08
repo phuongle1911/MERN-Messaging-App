@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import api from "../api";
+import React from "react";
 
 export function LogoutButton() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export function LogoutButton() {
 
   return (
     <button onClick={handleLogout} className="button--logout">
-        Log Out
+      Log Out
     </button>
   );
   

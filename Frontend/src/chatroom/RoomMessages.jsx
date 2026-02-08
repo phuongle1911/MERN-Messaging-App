@@ -51,11 +51,11 @@ export default function RoomMessages({ socket }) {
     }, [socket]); //retrigger whenever socket changes (to remount the listeners)
 
     return (
-        <div className="message-container"> 
-            {loadedMessages.map((msg, index)=>(
-                <Message key={index} message={msg}/>
-            ))}
+      <div className="message-container"> 
+        {loadedMessages.map((msg, index)=>(
+          <Message key={index} message={msg}/>
+				))}
             
-        </div>
+      </div>
     );
 }

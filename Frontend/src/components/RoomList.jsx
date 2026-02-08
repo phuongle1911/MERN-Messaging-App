@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { RoomDataContext } from "../Contexts/RoomDataContext";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +19,7 @@ export function RoomList() {
     <section className='rooms-list'>
       {
         rooms.map(room => (
+          // eslint-disable-next-line react/jsx-key
           <div>
             <p key={room._id}> { room.name }</p>
             <button onClick={() => onSubmit(room._id)}>Go to room</button>

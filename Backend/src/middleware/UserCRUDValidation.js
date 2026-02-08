@@ -95,7 +95,7 @@ async function verifyJwt (request, response, next) {
 		let tokenVerificationResult = await validateJWT(authCookie);
 
     //Check if the jwt has been logged out
-    findJwtInBlackList = await BlackListModel.findOne({oldjwt: authCookie});
+    let findJwtInBlackList = await BlackListModel.findOne({oldjwt: authCookie});
     
     if (findJwtInBlackList) {
       return next(new Error("User has logged out, please log in again!"))
@@ -134,9 +134,9 @@ async function logout(request, response, next) {
 
   try {
     //Validate the JWT
-		token = await validateJWT(authCookie);
+		await validateJWT(authCookie);
 
-    expiredJwt = await BlackListModel.create({oldjwt: authCookie});
+    await BlackListModel.create({oldjwt: authCookie});
     response.clearCookie("authcookie");
     next();
 

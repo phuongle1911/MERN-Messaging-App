@@ -1,5 +1,7 @@
 import { useState } from "react"
-import api from "../api"
+import api from "../api";
+import React from "react";
+
 
 export function UserDisplay({ username, userId, isConnected }) {
 
@@ -28,8 +30,8 @@ export function UserDisplay({ username, userId, isConnected }) {
         <p>{username}</p>
         
       </span>
-    {(isConnected === false) && <button className="connected" onClick={() => {createConnection(); handleClick()}} disabled={isDisable}>{buttonText}</button>}
-    {(isConnected === true) && <p>Connected</p>}
+      {(isConnected === false) && <button className="connected" onClick={() => {createConnection(); handleClick()}} disabled={isDisable}>{buttonText}</button>}
+      {(isConnected === true) && <p>Connected</p>}
 
     </div>
 
