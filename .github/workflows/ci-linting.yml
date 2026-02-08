@@ -27,8 +27,8 @@ jobs:
       - uses: reviewdog/action-eslint@v1.34.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review # Change reporter.
-          eslint_flags: "/Backend"
+          reporter: github-pr-review 
+          eslint_flags: "Backend/"
       - uses: tj-actions/eslint-changed-files@v25.3.2
         with:
           config_path: "./eslint.config.mjs"
@@ -45,8 +45,8 @@ jobs:
       - uses: reviewdog/action-eslint@v1.34.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review # Change reporter.
-          eslint_flags: "/Frontend"
+          reporter: github-pr-review
+          eslint_flags: "Frontend/"
       - uses: tj-actions/eslint-changed-files@v25.3.2
         with:
           config_path: "./eslint.config.mjs"
