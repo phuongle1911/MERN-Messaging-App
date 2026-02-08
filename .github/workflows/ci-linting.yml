@@ -7,6 +7,15 @@ on:
       - main
 
 jobs:
+  check-github-api:
+    name: check github api response
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+      - run: echo "github.event.pull_request"
   eslint-backend:
     name: eslint backend
     if: github.head_ref === 'backend'
