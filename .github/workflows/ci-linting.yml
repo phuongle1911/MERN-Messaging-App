@@ -7,18 +7,18 @@ on:
       - main
 
 jobs:
-  check-github-api:
-    name: check github api response
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v6
-      - run: echo "github.event.pull_request"
+  # check-github-api:
+  #   name: check github api response
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     pull-requests: write
+  #   steps:
+  #     - uses: actions/checkout@v6
+  #     - run: echo "github.event.pull_request"
   eslint-backend:
     name: eslint backend
-    if: github.head_ref === 'backend'
+    if: contains(github.head_ref,'backend') === true
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -36,7 +36,7 @@ jobs:
 
     eslint-frontend:
       name: eslint frontend
-      if: github.head_ref === 'frontend'
+      if: contains(github.head_ref,'frontend') === true
       runs-on: ubuntu-latest
       permissions:
         contents: read
