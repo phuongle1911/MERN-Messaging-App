@@ -3,6 +3,8 @@ name: Linting code
 on:
   pull_request:
     types: [opened, reopened]
+    branches:
+      - main
 
 jobs:
   eslint-backend:
@@ -18,7 +20,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review # Change reporter.
-          eslint_flags: "/Backend/src"
+          eslint_flags: "/Backend"
       - uses: tj-actions/eslint-changed-files@v25.3.2
         with:
           config_path: "./eslint.config.mjs"
@@ -36,7 +38,7 @@ jobs:
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             reporter: github-pr-review # Change reporter.
-            eslint_flags: "/Frontend/src"
+            eslint_flags: "/Frontend"
         - uses: tj-actions/eslint-changed-files@v25.3.2
           with:
             config_path: "./eslint.config.mjs"
