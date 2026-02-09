@@ -8,7 +8,7 @@
     "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js",
     "test": "jest",
     "test:cc": "jest --detectOpenHandles --forceExit --coverage",
-    "test:report": "jest --ci --reporters=default --reporters=jest-junit"
+    "test:reporter": "jest --ci --reporters=default --reporters=jest-junit"
   },
   "repository": {
     "type": "git",
