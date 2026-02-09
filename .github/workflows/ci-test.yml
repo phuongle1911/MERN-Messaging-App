@@ -1,0 +1,22 @@
+name: Run backend tests
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+  workflow_dispatch:
+
+jobs:
+  backend_tests:
+    name: backend tests
+    if: contains(github.head_ref,'backend')
+    uses: ./.github/workflows/ci-test-callable.yml
+    with:
+      testDirectory: "Backend/"
+
+  frontend_tests:
+    name: frontend tests
+    if: contains(github.head_ref,'frontend')
+    uses: ./.github/workflows/ci-test-callable.yml
+    with:
+      testDirectory: "Frontend/"

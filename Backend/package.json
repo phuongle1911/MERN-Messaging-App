@@ -7,7 +7,8 @@
     "start": "node src/index.js",
     "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js",
     "test": "jest",
-    "test:cc": "jest --detectOpenHandles --forceExit --coverage"
+    "test:cc": "jest --detectOpenHandles --forceExit --coverage",
+    "test:report": "jest --ci --reporters=default --reporters=jest-junit"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,22 @@
   "devDependencies": {
     "globals": "^16.5.0",
     "jest": "^30.2.0",
+    "jest-junit": "^16.0.0",
     "supertest": "^7.1.4"
+  },
+  "jest": {
+    "reporters": [
+      "default", "jest-junit"
+    ]
+  },
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "outputDirectory": "reports",
+    "outputName": "jest-junit.xml",
+    "uniqueOutputName": "false",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}",
+    "ancestorSeparator": " › ",
+    "usePathForSuiteName": "false"
   }
 }

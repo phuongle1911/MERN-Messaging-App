@@ -1,0 +1,43 @@
+name: Project test callable workflow
+
+on:
+  workflow_callt:
+    inputs:
+      testDirectory:
+        required: true
+        type: string
+
+
+jobs:
+  test_runner:
+    name: test runner
+    runs-on: ubuntu-latest
+  
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout or clone a copy of the repo to the action runner
+        uses: actions/checkout@v6
+      
+      - name: Direct to test directory
+        run: cd ${{ inputs.testDirectory }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run the tests
+        run: npm run test:reporter
+
+      - name: Confirm that new test output file exists
+        run: ls
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: (!cancelled())
+        with:
+          files: |
+            reports/jest-junit.xml
+
+      

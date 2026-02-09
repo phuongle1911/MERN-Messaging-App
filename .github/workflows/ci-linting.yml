@@ -5,15 +5,6 @@ on:
     types: [opened, reopened]
 
 jobs:
-  # check_github_api:
-  #   name: check github api response
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read
-  #     pull-requests: write
-  #   steps:
-  #     - uses: actions/checkout@v6
-  #     - run: echo "head_ref output is ${{github.head_ref}}"
 
   eslint_backend:
     name: eslint backend
