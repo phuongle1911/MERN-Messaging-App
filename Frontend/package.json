@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "test:report": "vitest --reporter=junit --outputFile=./reports/vitest-junit.xml"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.2",
@@ -30,5 +31,11 @@
     "globals": "^16.5.0",
     "jsdom": "^27.2.0",
     "vitest": "^4.0.10"
+  },
+
+  "test": {
+    "reporters": [
+      "junit", { "suiteName": "frontend test"}
+    ]
   }
 }
