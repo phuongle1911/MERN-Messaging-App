@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="6" failures="0" errors="0" time="0.381675542">
+    <testsuite name="src/__tests__/FriendsList.test.jsx" timestamp="2026-02-10T07:54:44.976Z" hostname="Jakes-MacBook-Air.local" tests="1" failures="0" errors="0" skipped="0" time="0.012653292">
+        <testcase classname="src/__tests__/FriendsList.test.jsx" name="FriendList &gt; Show message if it&apos;s empty" time="0.011999583">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/__tests__/FriendsOptionsMenu.test.jsx" timestamp="2026-02-10T07:54:44.977Z" hostname="Jakes-MacBook-Air.local" tests="4" failures="0" errors="0" skipped="0" time="0.2320155">
+        <testcase classname="src/__tests__/FriendsOptionsMenu.test.jsx" name="OptionMenu &gt; Room" time="0.144265917">
+        </testcase>
+        <testcase classname="src/__tests__/FriendsOptionsMenu.test.jsx" name="OptionMenu &gt; profileButton" time="0.012093584">
+        </testcase>
+        <testcase classname="src/__tests__/FriendsOptionsMenu.test.jsx" name="OptionMenu &gt; Delete Friend" time="0.0631075">
+        </testcase>
+        <testcase classname="src/__tests__/FriendsOptionsMenu.test.jsx" name="OptionMenu &gt; Delete Friend if click cancel" time="0.010032375">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/__tests__/LogOutBttm.test.jsx" timestamp="2026-02-10T07:54:44.977Z" hostname="Jakes-MacBook-Air.local" tests="1" failures="0" errors="0" skipped="0" time="0.13700675">
+        <testcase classname="src/__tests__/LogOutBttm.test.jsx" name="Logout Button &gt;  Alert, Api and navigate when logout " time="0.135761792">
+        </testcase>
+    </testsuite>
+</testsuites>
