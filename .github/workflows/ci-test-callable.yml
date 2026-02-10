@@ -24,20 +24,19 @@ jobs:
       - name: Direct to test directory and run test
         run: |
           cd ${{ inputs.testDirectory }}
-          pwd
           npm ci
-          npm run
           npm run test:report
-          ls
 
       - name: Confirm that new test output file exists
-        run: ls
+        run: |
+          cd ${{ inputs.testDirectory }}
+          ls
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: (!cancelled())
         with:
           files: |
-            reports/jest-junit.xml
+            ${{ inputs.testDirectory }}reports/jest-junit.xml
 
       
