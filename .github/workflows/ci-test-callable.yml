@@ -37,6 +37,6 @@ jobs:
         if: (!cancelled())
         with:
           files: |
-            ${{ inputs.testDirectory }}reports/jest-junit.xml
+            ${{ inputs.reportFilePath }}
 
       

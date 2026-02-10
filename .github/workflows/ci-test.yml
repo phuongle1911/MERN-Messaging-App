@@ -12,6 +12,7 @@ jobs:
     uses: ./.github/workflows/ci-test-callable.yml
     with:
       testDirectory: "Backend/"
+      reportFilePath: "/Backend/reports/jest-junit.xml"
 
   frontend_tests:
     name: frontend tests
@@ -19,3 +20,4 @@ jobs:
     uses: ./.github/workflows/ci-test-callable.yml
     with:
       testDirectory: "Frontend/"
+      reportFilePath: "Frontend/reports/vitest-junit.xml"

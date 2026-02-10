@@ -16,8 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - run: npm ci
-      - run: cd Backend/
-      - run: npm ci
       - uses: reviewdog/action-eslint@v1.34.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
