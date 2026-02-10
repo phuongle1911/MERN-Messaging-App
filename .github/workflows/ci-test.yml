@@ -20,4 +20,4 @@ jobs:
     uses: ./.github/workflows/ci-test-callable.yml
     with:
       testDirectory: "Frontend/"
-      reportFilePath: "Frontend/reports/vitest-junit.xml"
+      reportFilePath: "/Frontend/reports/vitest-junit.xml"
