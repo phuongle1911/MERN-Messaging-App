@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="2" failures="0" errors="0" time="0.598">
-  <testsuite name="Users route works." errors="0" failures="0" skipped="0" timestamp="2026-02-09T17:37:29" time="0.564" tests="2">
-    <testcase classname="Users route works." name="Register route works " time="0.017">
-    </testcase>
-    <testcase classname="Users route works." name="Login route works " time="0.002">
-    </testcase>
-  </testsuite>
-</testsuites>
