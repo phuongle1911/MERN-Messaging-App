@@ -26,4 +26,3 @@ export function FriendUser({ friend }) {
     </div>
   );
 };
-testing
