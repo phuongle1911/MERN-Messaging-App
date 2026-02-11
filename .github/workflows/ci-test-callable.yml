@@ -6,6 +6,9 @@ on:
       testDirectory:
         required: true
         type: string
+      reportFilePath:
+        required: true
+        type: string
 
 
 jobs:
