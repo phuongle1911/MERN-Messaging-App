@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.54% </span>
+                <span class="strong">77.55% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/44</span>
+                <span class='fraction'>38/49</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.54% </span>
+                <span class="strong">77.55% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/44</span>
+                <span class='fraction'>38/49</span>
             </div>
         
             
@@ -176,7 +176,18 @@
 <a name='L111'></a><a href='#L111'>111</a>
 <a name='L112'></a><a href='#L112'>112</a>
 <a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -194,7 +205,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,8 +217,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -224,16 +238,16 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -283,6 +297,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -294,7 +312,6 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
 const helmet = require("helmet");
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
@@ -304,7 +321,9 @@ const connectionController = require("./controllers/ConnectionController");
 const roomChatController = require("./controllers/RoomChatController");
 const multer = require("multer");
 const path = require("path");
-&nbsp;
+const cookieParser = require("cookie-parser");
+const dotenv = require('dotenv');
+dotenv.config();
 &nbsp;
 &nbsp;
 // // Serve files from "public" folder
@@ -320,9 +339,13 @@ app.use(
   })
 );
 &nbsp;
+app.use(cookieParser());
+&nbsp;
 // Allow requests only from this origins
-let corsOption = { origin: [
-  "http://localhost:5000",
+let corsOption = { 
+  credentials: true,
+  origin: [
+  "http://localhost:5173",
   "https://DatingApp.com"
 ], optionsSuccessStatus: 200}
 app.use(cors(corsOption));
@@ -334,9 +357,13 @@ app.use(express.urlencoded({extended: true}));
 &nbsp;
 &nbsp;
 // image storage 
-let storage = multer.diskStorage({
-  destination: <span class="fstat-no" title="function not covered" >(r</span>equest, fie, cb) =&gt; {
-<span class="cstat-no" title="statement not covered" >    cb(null, 'uploads')</span>
+const storage = multer.diskStorage({
+  destination: <span class="fstat-no" title="function not covered" >fu</span>nction (request, fie, cb) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >    cb(null, '../src/public/uploads/')</span>
+    } catch (err) {
+<span class="cstat-no" title="statement not covered" >      console.log(err);</span>
+    }
   },
   filename: <span class="fstat-no" title="function not covered" >(r</span>equest, file, cb) =&gt; {
 <span class="cstat-no" title="statement not covered" >    cb(null, file.fieldname+ '-' + Date.now())</span>
@@ -344,10 +371,6 @@ let storage = multer.diskStorage({
 });
 &nbsp;
 &nbsp;
-// Route to send the chat html page
-app.get("/", <span class="fstat-no" title="function not covered" >(r</span>equest,response) =&gt; {
-<span class="cstat-no" title="statement not covered" >  response.sendFile(path.join(__dirname, "public", "index.html"));</span>
-});
 &nbsp;
 &nbsp;
 // Start the server on port 3000
@@ -361,7 +384,7 @@ require('./sockets/websocket.js')(server);
 &nbsp;
 &nbsp;
 // Route to check MongoDB status
-app.get("/databaseHealth", <span class="fstat-no" title="function not covered" >(r</span>equest, response) =&gt; {
+app.get("/api/databaseHealth", <span class="fstat-no" title="function not covered" >(r</span>equest, response) =&gt; {
   let databaseState = <span class="cstat-no" title="statement not covered" >mongoose.connection.readyState;</span>
   let databaseName = <span class="cstat-no" title="statement not covered" >mongoose.connection.name;</span>
   let databaseModels = <span class="cstat-no" title="statement not covered" >mongoose.connection.modelNames();</span>
@@ -375,10 +398,10 @@ app.get("/databaseHealth", <span class="fstat-no" title="function not covered" >
 })
 })
 &nbsp;
-app.use("/users", userController);
-app.use("/profiles", profileController);
-app.use("/connection", connectionController);
-app.use("/rooms", roomChatController);
+app.use("/api/users", userController);
+app.use("/api/profiles", profileController);
+app.use("/api/connection", connectionController);
+app.use("/api/rooms", roomChatController);
 &nbsp;
 &nbsp;
 // Error handler Middleware
@@ -390,10 +413,14 @@ app.use((error, request, response, next) =&gt; {
 &nbsp;
 &nbsp;
 // 404 route  
-app.all(/.*/, <span class="fstat-no" title="function not covered" >(r</span>equest,response)=&gt; {
-<span class="cstat-no" title="statement not covered" >  response.status(404).json({ message: " Route not found in this API",</span>
-  targetPath: request.path
+app.all('/api/*path', <span class="fstat-no" title="function not covered" >(r</span>equest,response)=&gt; {
+<span class="cstat-no" title="statement not covered" >  response.status(404).json({ message: " Route not found in this API"</span>
   })
+});
+&nbsp;
+// Route to send the chat html page
+app.get("*path", <span class="fstat-no" title="function not covered" >(r</span>equest,response) =&gt; {
+<span class="cstat-no" title="statement not covered" >  response.sendFile(path.join(__dirname, "public", "index.html"));</span>
 });
 &nbsp;
 &nbsp;
@@ -409,7 +436,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-12T01:26:30.092Z
+                at 2026-02-11T06:34:38.164Z
             </div>
         <script src="../prettify.js"></script>
         <script>

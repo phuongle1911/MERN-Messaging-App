@@ -2,6 +2,7 @@ const request = require("supertest");
 const { app } = require("../server");
 
 const { UserModel } = require("../database/entities/User");
+const { dbClose } = require("../database/connectionManager");
 
 describe("Users route works.", () => {
   it("Register route works ", async () => {
@@ -18,6 +19,7 @@ describe("Users route works.", () => {
       .send(registerUser);
     expect(response.status).toEqual(200);
   });
+    dbClose();
 
   it("Login route works ", async () => {
     // Spy on UserModel.findOne and mock its resolution

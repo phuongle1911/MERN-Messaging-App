@@ -1,0 +1,70 @@
+name: Build and push Docker image to GHCR
+
+on:
+  push:
+    tags: ["v*"]
+
+  workflow_dispatch:
+    inputs:
+      new-version-tag:
+        required: true
+        type: string
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+
+    # environmen
+    env:
+      VERSION_TAG: ""
+      OWNER_LC: ""
+      REPO_LC: ""
+
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Get the image version tag
+        env:
+          ACTIVE_TAG: '${{ inputs.new-version-tag || github.ref_name }}'
+        run: |
+          echo "VERSION_TAG=${ACTIVE_TAG,,}" >>${GITHUB_ENV}
+
+
+      - name: Sanitise env data for Docker image tagging
+        run: |
+          echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+          echo "REPO_LC=${REPO,,}" >> ${GITHUB_ENV}
+        env:
+          OWNER: '${{ github.repository_owner }}'
+          REPO: '${{ github.repository }}'
+          
+      # Log in to our target container registry
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Additional helper for multi-platform image builds
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      # Another additional helper for multi-platform image builds
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Actual image building and image pushing
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/${{env.REPO_LC}}:latest
+            ghcr.io/${{env.REPO_LC}}:${{env.VERSION_TAG}}
+          secrets: |
+            "jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}"
+
+        
+

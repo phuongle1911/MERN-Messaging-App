@@ -1,0 +1,22 @@
+name: Remove untagged Docker images
+
+on:
+  registry_package:
+    types: [published]
+
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: read
+      packages: write 
+
+    steps:
+      - uses: actions/delete-package-versions@v5.0.0
+        with:
+          package-name: 'message-app'
+          package-type: 'container'
+          min-versions-to-keep: 0
+          delete-only-untagged-versions: 'true'
