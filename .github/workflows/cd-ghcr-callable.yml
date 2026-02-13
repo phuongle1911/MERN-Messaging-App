@@ -1,11 +1,16 @@
 name: Build and push Docker image to GHCR
 
 on:
-  push:
-    tags: ["v*"]
-
-  workflow_dispatch:
+  workflow_call:
     inputs:
+      DOCKER_PATH:
+        required: true
+        type: string
+        
+      target:
+        required: true
+        type: string
+
       new-version-tag:
         required: true
         type: string
@@ -60,9 +65,11 @@ jobs:
         with:
           platforms: linux/amd64
           push: true
+          context: ${{ inputs.DOCKER_PATH}}
           tags: |
             ghcr.io/${{env.REPO_LC}}:latest
             ghcr.io/${{env.REPO_LC}}:${{env.VERSION_TAG}}
+          target: ${{ inputs.target}}
           secrets: |
             "jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}"
 

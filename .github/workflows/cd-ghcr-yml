@@ -1,0 +1,26 @@
+name: Build and push Docker image to GHCR
+
+on:
+  push:
+    tags: ["v*"]
+
+  workflow_dispatch:
+    inputs:
+      new-version-tag:
+        required: true
+        type: string
+
+jobs:
+  backend_dev:
+    name: backend dev
+    uses: ./.github/workflows/cd-ghcr-callable.yml
+    with: 
+      DOCKER_PATH: "Backend/"
+      target: "development"
+
+  frontend_dev:
+    name: frontend dev
+    uses: ./.github/workflows/cd-ghcr-callable.yml
+    with: 
+      DOCKER_PATH: "Frontend/"
+      target: "development"
