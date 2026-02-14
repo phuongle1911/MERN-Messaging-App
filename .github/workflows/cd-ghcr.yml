@@ -15,7 +15,7 @@ jobs:
     name: backend dev
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
-      DOCKER_PATH: "./Backend"
+      DOCKER_PATH: ./Backend
       target: "development"
       new-version-tag: ${{ inputs.new-version-tag }}
 
@@ -23,7 +23,7 @@ jobs:
     name: frontend dev
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
-      DOCKER_PATH: "./Frontend"
+      DOCKER_PATH: ./Frontend
       target: "development"
       new-version-tag: ${{ inputs.new-version-tag }}
 
@@ -31,6 +31,6 @@ jobs:
     name: application production
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with:
-      DOCKER_PATH: "./Backend"
+      DOCKER_PATH: ./Backend
       target: "production"
       new-version-tag: ${{ inputs.new-version-tag }}
