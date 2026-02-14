@@ -1,4 +1,4 @@
-name: Build and push Docker image to GHCR
+name: Callable workflow - Build and push Docker image to GHCR
 
 on:
   workflow_call:

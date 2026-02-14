@@ -24,3 +24,10 @@ jobs:
     with: 
       DOCKER_PATH: "Frontend/"
       target: "development"
+
+  app_prod:
+    name: application production
+    uses: ./.github/workflows/cd-ghcr-callable.yml
+    with:
+      DOCKER_PATH: "Backend/"
+      target: "production"
