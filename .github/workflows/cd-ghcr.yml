@@ -25,6 +25,7 @@ jobs:
     with: 
       DOCKER_PATH: "Frontend/"
       target: "development"
+      new-version-tag: ${{ inputs.new-version-tag }}
 
   app_prod:
     name: application production
