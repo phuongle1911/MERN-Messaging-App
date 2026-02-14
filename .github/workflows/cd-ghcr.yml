@@ -17,6 +17,7 @@ jobs:
     with: 
       DOCKER_PATH: "Backend/"
       target: "development"
+      new-version-tag: ${{ inputs.new-version-tag }}
 
   frontend_dev:
     name: frontend dev
@@ -31,3 +32,4 @@ jobs:
     with:
       DOCKER_PATH: "Backend/"
       target: "production"
+      new-version-tag: ${{ inputs.new-version-tag }}
