@@ -32,6 +32,9 @@ jobs:
       contents: read
 
     steps:
+      - name: Checkout or clone a copy of the repo to the action runner
+        uses: actions/checkout@v6
+
       - name: Get the image version tag
         env:
           ACTIVE_TAG: '${{ inputs.new-version-tag || github.ref_name }}'

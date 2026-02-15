@@ -1,5 +1,5 @@
 name: Deploy to GCP 
-
+# add environment variable for production
 on:
   workflow_run:
     workflows: [Build and push Docker image to GHCR]
