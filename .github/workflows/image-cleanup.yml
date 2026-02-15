@@ -16,7 +16,8 @@ jobs:
     steps:
       - uses: actions/delete-package-versions@v5
         with:
-          package-name: 'message-app'
+          owner: ${{ github.repository_owner }}
+          package-name: ' ${{ github.repository }}'
           package-type: 'container'
           min-versions-to-keep: 0
           delete-only-untagged-versions: 'true'
