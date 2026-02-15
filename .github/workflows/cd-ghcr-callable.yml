@@ -75,9 +75,9 @@ jobs:
           tags: |
             ghcr.io/${{env.REPO_LC}}:latest
             ghcr.io/${{env.REPO_LC}}:${{env.VERSION_TAG}}
-          target: ${{ inputs.target}}
+          target: ${{ inputs.target }}
           secrets: |
-            "jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}"
+            jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}
 
         
 

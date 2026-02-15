@@ -40,6 +40,6 @@ jobs:
     # environment: ${{ inputs.environment }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with:
-      DOCKER_PATH: ../Backend
+      DOCKER_PATH: ./Backend
       target: "production"
       new-version-tag: ${{ inputs.new-version-tag }}
