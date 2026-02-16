@@ -20,6 +20,9 @@ jobs:
   backend_dev:
     name: backend dev
     # environment: ${{ inputs.environment }}
+    needs: |
+      ./.github/workflows/ci-linting.yml
+      ./.github/workflows/ci-test.yml
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
       DOCKER_PATH: ./Backend
@@ -28,6 +31,9 @@ jobs:
 
   frontend_dev:
     name: frontend dev
+    needs: |
+      ./.github/workflows/ci-linting.yml
+      ./.github/workflows/ci-test.yml
     # environment: ${{ inputs.environment }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
@@ -37,6 +43,9 @@ jobs:
 
   app_prod:
     name: application production
+    needs: |
+      ./.github/workflows/ci-linting.yml
+      ./.github/workflows/ci-test.yml
     # environment: ${{ inputs.environment }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with:
