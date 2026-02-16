@@ -21,12 +21,15 @@ jobs:
   build-image:
     runs-on: ubuntu-latest
 
-    # environmen
     env:
       VERSION_TAG: ""
       OWNER_LC: ""
       REPO_LC: ""
 
+    needs: |
+      ./.github/workflows/ci-linting.yml
+      ./.github/workflows/ci-test.yml
+      
     permissions:
       packages: write
       contents: read
