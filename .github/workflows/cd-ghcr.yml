@@ -16,8 +16,7 @@ on:
           - development
           - production
         default: 'production'
-# env:
-#   DEPLOY_ENV: ${{ inputs.environment || 'production' }}
+
 
 jobs:
   backend_dev:
