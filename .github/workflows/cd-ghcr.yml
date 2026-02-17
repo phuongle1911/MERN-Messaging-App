@@ -9,17 +9,18 @@ on:
       new-version-tag:
         required: true
         type: string
-      # environment:
-      #   type: choice
-      #   required: true
-      #   options:
-      #     - development
-      #     - production
+      environment:
+        type: choice
+        required: true
+        options:
+          - development
+          - production
 
 jobs:
   backend_dev:
     name: backend dev
-    # environment: ${{ inputs.environment }}
+    if: inputs.environment === 'development'
+    environment: ${{ inputs.environment }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
       DOCKER_PATH: ./Backend
@@ -28,7 +29,8 @@ jobs:
 
   frontend_dev:
     name: frontend dev
-    # environment: ${{ inputs.environment }}
+    if: inputs.environment === 'development'
+    environment: ${{ inputs.environment }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
       DOCKER_PATH: ./Frontend
@@ -37,9 +39,10 @@ jobs:
 
   app_prod:
     name: application production
-    # environment: ${{ inputs.environment }}
+    if: inputs.environment === 'development'
+    environment: ${{ inputs.environment }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with:
-      DOCKER_PATH: ./Backend
+      DOCKER_PATH: .
       target: "production"
       new-version-tag: ${{ inputs.new-version-tag }}
