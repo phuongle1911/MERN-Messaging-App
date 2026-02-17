@@ -15,39 +15,37 @@ on:
         options:
           - development
           - production
-env:
-  DEPLOY_ENV: ${{ inputs.environment || 'production' }}
+        default: 'production'
+# env:
+#   DEPLOY_ENV: ${{ inputs.environment || 'production' }}
 
 jobs:
   backend_dev:
     name: backend dev
-    if: ${{ env.DEPLOY_ENV == 'development' }}
-    environment: ${{ env.DEPLOY_ENV }}
+    if: ${{ inputs.environment == 'development' }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
       DOCKER_PATH: ./Backend
       target: "development"
       new-version-tag: ${{ inputs.new-version-tag }}
-      environment: ${{ env.DEPLOY_ENV }}
+      environment: ${{ inputs.environment }}
 
   frontend_dev:
     name: frontend dev
-    if: ${{ env.DEPLOY_ENV == 'development' }}
-    environment: ${{ env.DEPLOY_ENV }}
+    if: ${{ inputs.environment == 'development' }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
       DOCKER_PATH: ./Frontend
       target: "development"
       new-version-tag: ${{ inputs.new-version-tag }}
-      environment: ${{ env.DEPLOY_ENV }}
+      environment: ${{ inputs.environment}}
 
   app_prod:
     name: application production
-    if: ${{ env.DEPLOY_ENV == 'production' }}
-    environment: ${{ env.DEPLOY_ENV }}
+    if: ${{ inputs.environment == 'production' }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with:
       DOCKER_PATH: .
       target: "production"
       new-version-tag: ${{ inputs.new-version-tag }}
-      environment: ${{ env.DEPLOY_ENV }}
+      environment: ${{ inputs.environment }}

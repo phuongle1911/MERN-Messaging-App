@@ -36,6 +36,8 @@ jobs:
       packages: write
       contents: read
 
+    environment: ${{ inputs.environment }}
+    
     steps:
       - name: Checkout or clone a copy of the repo to the action runner
         uses: actions/checkout@v6
@@ -43,10 +45,8 @@ jobs:
       - name: Get the image tag
         env:
           ACTIVE_TAG: '${{ inputs.new-version-tag || github.ref_name }}'
-          ACTIVE_ENV_TAG: '${{ inputs.environment }}'
         run: |
           echo "VERSION_TAG=${ACTIVE_TAG,,}" >>${GITHUB_ENV}
-          echo "ENV_TAG=${ACTIVE_ENV_TAG,,}" >>${GITHUB_ENV}
 
 
       - name: Sanitise env data for Docker image tagging
@@ -80,8 +80,8 @@ jobs:
           push: true
           context: ${{ inputs.DOCKER_PATH}}
           tags: |
-            ghcr.io/${{env.REPO_LC}}-${{env.ENV_TAG}}:latest
-            ghcr.io/${{env.REPO_LC}}-${{env.ENV_TAG}}:${{env.VERSION_TAG}}
+            ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:latest
+            ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:${{env.VERSION_TAG}}
           target: ${{ inputs.target }}
           secrets: |
             jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}
