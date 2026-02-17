@@ -77,7 +77,7 @@ jobs:
         with:
           platforms: linux/amd64
           push: true
-          context: ${{ inputs.DOCKER_PATH}}
+          file: ${{ inputs.DOCKER_PATH}}
           tags: |
             ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:latest
             ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:${{env.VERSION_TAG}}

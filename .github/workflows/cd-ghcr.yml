@@ -24,7 +24,7 @@ jobs:
     if: ${{ inputs.environment == 'development' }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
-      DOCKER_PATH: ./Backend
+      DOCKER_PATH: ./Backend/Dockerfile
       target: "development"
       new-version-tag: ${{ inputs.new-version-tag }}
       environment: ${{ inputs.environment }}
@@ -34,7 +34,7 @@ jobs:
     if: ${{ inputs.environment == 'development' }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
-      DOCKER_PATH: ./Frontend
+      DOCKER_PATH: ./Frontend/Dockerfile
       target: "development"
       new-version-tag: ${{ inputs.new-version-tag }}
       environment: ${{ inputs.environment}}
@@ -44,7 +44,7 @@ jobs:
     if: ${{ inputs.environment == 'production' }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with:
-      DOCKER_PATH: .
+      DOCKER_PATH: ./Backend/Dockerfile
       target: "production"
       new-version-tag: ${{ inputs.new-version-tag }}
       environment: ${{ inputs.environment }}
