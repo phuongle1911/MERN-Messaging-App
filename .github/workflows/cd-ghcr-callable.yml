@@ -14,6 +14,11 @@ on:
       new-version-tag:
         required: true
         type: string
+
+      environment:
+        required: true
+        type: string
+
     secrets:
       jwt_secret_key:
         required: false
@@ -22,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      ENV_TAG: ""
       VERSION_TAG: ""
       OWNER_LC: ""
       REPO_LC: ""
@@ -34,11 +40,13 @@ jobs:
       - name: Checkout or clone a copy of the repo to the action runner
         uses: actions/checkout@v6
 
-      - name: Get the image version tag
+      - name: Get the image tag
         env:
           ACTIVE_TAG: '${{ inputs.new-version-tag || github.ref_name }}'
+          ACTIVE_ENV_TAG: "${{ inputs.environment }}"
         run: |
           echo "VERSION_TAG=${ACTIVE_TAG,,}" >>${GITHUB_ENV}
+          echo "ENV_TAG=${{ACTIVE_ENV_TAG,,}}" >>${GITHUB_ENV}
 
 
       - name: Sanitise env data for Docker image tagging
@@ -72,8 +80,8 @@ jobs:
           push: true
           context: ${{ inputs.DOCKER_PATH}}
           tags: |
-            ghcr.io/${{env.REPO_LC}}:latest
-            ghcr.io/${{env.REPO_LC}}:${{env.VERSION_TAG}}
+            ghcr.io/${{env.REPO_LC}}-${{env.ENV_TAG}}:latest
+            ghcr.io/${{env.REPO_LC}}-${{env.ENV_TAG}}:${{env.VERSION_TAG}}
           target: ${{ inputs.target }}
           secrets: |
             jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}
