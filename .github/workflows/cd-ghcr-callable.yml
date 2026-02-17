@@ -36,6 +36,7 @@ jobs:
       packages: write
       contents: read
 
+    environment: ${{ inputs.environment }}
     
     steps:
       - name: Checkout or clone a copy of the repo to the action runner
