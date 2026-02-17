@@ -14,11 +14,22 @@ jobs:
       packages: write 
 
     steps:
-      - uses: actions/delete-package-versions@v5
+      - name: delete untagged images in development package
+        uses: actions/delete-package-versions@v5
         with:
           owner: ${{ github.repository_owner }}
-          package-name: 'mern-messaging-app-development, mern-messaging-app-production'
+          package-name: 'mern-messaging-app-development'
           package-type: 'container'
           min-versions-to-keep: 0
           delete-only-untagged-versions: 'true'
           token: ${{ github.token }}
+      - name: delete untagged images in production package
+        uses: actions/delete-package-versions@v5
+        with:
+          owner: ${{ github.repository_owner }}
+          package-name: 'mern-messaging-app-production'
+          package-type: 'container'
+          min-versions-to-keep: 0
+          delete-only-untagged-versions: 'true'
+          token: ${{ github.token }}
+      
