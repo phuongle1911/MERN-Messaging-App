@@ -83,6 +83,7 @@ jobs:
             ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:latest
             ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:${{env.VERSION_TAG}}
           target: ${{ inputs.target }}
+          provenance: false
 
         
 
