@@ -19,7 +19,7 @@ on:
 jobs:
   backend_dev:
     name: backend dev
-    if: inputs.environment === 'development'
+    if: ${{ inputs.environment == 'development' }}
     environment: ${{ inputs.environment }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
@@ -29,7 +29,7 @@ jobs:
 
   frontend_dev:
     name: frontend dev
-    if: inputs.environment === 'development'
+    if: ${{ inputs.environment == 'development' }}
     environment: ${{ inputs.environment }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with: 
@@ -39,7 +39,7 @@ jobs:
 
   app_prod:
     name: application production
-    if: inputs.environment === 'development'
+    if: ${{ inputs.environment == 'production' }}
     environment: ${{ inputs.environment }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with:
