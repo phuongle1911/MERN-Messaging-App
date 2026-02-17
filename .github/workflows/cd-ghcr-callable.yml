@@ -43,10 +43,10 @@ jobs:
       - name: Get the image tag
         env:
           ACTIVE_TAG: '${{ inputs.new-version-tag || github.ref_name }}'
-          ACTIVE_ENV_TAG: "${{ inputs.environment }}"
+          ACTIVE_ENV_TAG: '${{ inputs.environment }}'
         run: |
           echo "VERSION_TAG=${ACTIVE_TAG,,}" >>${GITHUB_ENV}
-          echo "ENV_TAG=${{ACTIVE_ENV_TAG,,}}" >>${GITHUB_ENV}
+          echo "ENV_TAG=${ACTIVE_ENV_TAG,,}" >>${GITHUB_ENV}
 
 
       - name: Sanitise env data for Docker image tagging
