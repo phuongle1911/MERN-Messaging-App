@@ -10,7 +10,7 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0.0
         with:
-          publish-dir: './dist'
+          publish-dir: './netlify-publish'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy Message App from GitHub Actions"
