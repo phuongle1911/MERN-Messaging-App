@@ -6,7 +6,7 @@ const { app } = require("./server.js");
 // DATABASE CONNECTION
 dbConnect().then(() => {
     // EXPRESS SERVER ACTIVATION
-  app.listen(PORT, () => {
+  app.listen(PORT, HOST, () => {
     console.log("The server is running in port:" + PORT);
   });
 });
