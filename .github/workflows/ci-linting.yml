@@ -5,43 +5,16 @@ on:
     types: [opened, reopened]
 
 jobs:
-
   eslint_backend:
     name: eslint backend
-    if: contains(github.head_ref,'backend')
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v6
-      - run: npm ci
-      - uses: reviewdog/action-eslint@v1.34.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review 
-          eslint_flags: "Backend/"
-      - uses: tj-actions/eslint-changed-files@v25.3.2
-        with:
-          config_path: "./eslint.config.mjs"
-
+    uses: ./.github/workflows/ci-linting-callable.yml
+    with:
+      branch_name: 'backend'
+      eslint_dir: 'Backend/'
+      
   eslint_frontend:
     name: eslint frontend
-    if: contains(github.head_ref,'frontend')
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v6
-      - run: npm ci
-      - run: cd Frontend/
-      - run: npm ci
-      - uses: reviewdog/action-eslint@v1.34.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          eslint_flags: "Frontend/"
-      - uses: tj-actions/eslint-changed-files@v25.3.2
-        with:
-          config_path: "./eslint.config.mjs"
+    uses: ./.github/workflows/ci-linting-callable.yml
+    with:
+      branch_name: 'frontend'
+      eslint_dir: 'Frontend/'

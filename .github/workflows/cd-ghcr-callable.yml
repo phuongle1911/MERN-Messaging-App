@@ -3,7 +3,7 @@ name: Callable workflow - Build and push Docker image to GHCR
 on:
   workflow_call:
     inputs:
-      DOCKER_PATH:
+      docker_path:
         required: true
         type: string
         
@@ -78,7 +78,7 @@ jobs:
         with:
           platforms: linux/amd64
           push: true
-          file: ${{ inputs.DOCKER_PATH}}
+          file: ${{ inputs.docker_path}}
           tags: |
             ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:latest
             ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:${{env.VERSION_TAG}}

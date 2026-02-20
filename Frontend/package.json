@@ -14,6 +14,7 @@
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.2",
     "axios": "^1.13.2",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -32,10 +33,12 @@
     "jsdom": "^27.2.0",
     "vitest": "^4.0.10"
   },
-
   "test": {
     "reporters": [
-      "junit", { "suiteName": "frontend test"}
+      "junit",
+      {
+        "suiteName": "frontend test"
+      }
     ]
   }
 }

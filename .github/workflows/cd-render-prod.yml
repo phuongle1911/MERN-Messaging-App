@@ -1,0 +1,22 @@
+name: Production deploy to Render
+
+on:
+  workflow_run:
+    workflows: [Build and push Docker image to GHCR - production]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  render-deploy-production:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Render
+        uses: gh-actions-workflows/deploy-docker-render@v1.3
+        with:
+          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          image-url: ghcr.io/phuongle1911/mern-messaging-app-production:latest
+          docker-repo-prefix: ghcr.io
+          wait-for-deployment: true
+          render-api-key: ${{ secrets.RENDER_API_KEY }}
