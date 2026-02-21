@@ -10,6 +10,10 @@ on:
       new-version-tag:
         required: true
         type: string
+env:
+  PROJECT_ID: "mern-messaging-app-487603"
+  GAR_REPO: "message-app-backend-dev"
+  IMAGE_NAME: "backend-dev"
 
 jobs:
   backend-dev:
@@ -17,19 +21,38 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-      
-      - name: confirm docker version
-        run: docker version
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2.1.8
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2.1.4
+
+      - name: Configure Docker Client for Gcloud
+        run: gcloud auth configure-docker gcr.io --quiet
+        shell: bash
+
+      - name: Build Docker Image
+        run: docker build --target development ./Backend
 
       - name: Push Docker Image to GAR
-        uses: a94763075/push-to-gar-github-action@v0.3.1
-        with:
-          gcloud_service_key: ${{ secrets.GCP_CREDENTIALS }}
-          project_id: 'mern-messaging-app-487603'
-          registry: 'gcr.io'
-          repository: 'message-app-backend-dev'
-          image_name: 'backend-dev'
-          image_tags: 'latest,${{inputs.new-version-tag}}'
-          dockerfile: './Backend/Dockerfile'
-          target: 'development'
-          free_docker_build_parameter: '--no-cache'
+        run: |
+          IFS=',' read -ra TAGS <<< "latest,${{ inputs.new-version-tag }}"
+          for tag in "${TAGS[@]}"; do
+            docker tag gcr.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME}}:grc.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME }}:$tag
+            docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME }}:$tag
+          done
+        shell: bash
+        # uses: a94763075/push-to-gar-github-action@v0.3.1
+        # with:
+        #   gcloud_service_key: ${{ secrets.GCP_CREDENTIALS }}
+        #   project_id: 'mern-messaging-app-487603'
+        #   registry: 'gcr.io'
+        #   repository: 'message-app-backend-dev'
+        #   image_name: 'backend-dev'
+        #   image_tags: 'latest,${{inputs.new-version-tag}}'
+        #   dockerfile: './Backend/Dockerfile'
+        #   target: 'development'
+        #   free_docker_build_parameter: '--no-cache'

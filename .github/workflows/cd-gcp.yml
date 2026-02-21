@@ -2,7 +2,7 @@ name: Backend deploy to GCP
 
 on:
   workflow_run:
-    workflows: [Build and push Docker image to GHCR - development]
+    workflows: [Build and Push Backend Docker Image to GAR]
     types:
       - completed
   workflow_dispatch:
