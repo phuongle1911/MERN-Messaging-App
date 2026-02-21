@@ -13,8 +13,9 @@ on:
 env:
   PROJECT_ID: "mern-messaging-app-487603"
   GAR_REPO: "message-app-backend-dev"
-  IMAGE_NAME: "backend-dev"
+  IMAGE_NAME: "backend-app-dev"
   REGISTRY: "us-central1-docker.pkg.dev"
+  LOCATION: "us-central1"
 
 jobs:
   backend-dev:
@@ -43,8 +44,8 @@ jobs:
         run: |
           IFS=',' read -ra TAGS <<< "latest,${{ inputs.new-version-tag }}"
           for tag in "${TAGS[@]}"; do
-            docker tag gcr.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME}} grc.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME }}:$tag
-            docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME }}:$tag
+            docker tag ${{ env.IMAGE_NAME}} ${{env.LOCATION}}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME}}:$tag
+            docker push ${{env.LOCATION}}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME}}:$tag
           done
         shell: bash
         # uses: a94763075/push-to-gar-github-action@v0.3.1
