@@ -23,7 +23,7 @@ jobs:
       - id: 'deploy'
         uses: 'google-github-actions/deploy-cloudrun@v3'
         with:
-          service: 'messaging-app'
+          service: 'mern-messaging-app-487603'
           image: 'ghcr.io/phuongle1911/mern-messaging-app-backend-development:latest'
           # source: "./"
           env_vars: |
