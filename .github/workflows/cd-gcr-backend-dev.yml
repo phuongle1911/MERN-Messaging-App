@@ -1,4 +1,4 @@
-name: Build and Push Backend Docker Image to Google Container Registry
+name: Build and Push Backend Docker Image to GCR
 
 on:
   push:
@@ -34,3 +34,4 @@ jobs:
           image_tag: latest,${{ inputs.new-version-tag }}
           dockerfile: ./Backend/Dockerfile
           context: ./Backend
+          target: development
