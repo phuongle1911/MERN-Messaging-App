@@ -25,7 +25,7 @@ jobs:
         with:
           service: 'mern-messaging-app-487603'
           image: 'ghcr.io/phuongle1911/mern-messaging-app-backend-development:latest'
-          # source: "./"
+          # source: "./Backend"
           env_vars: |
             JWT_SECRET=${{secrets.JWT_SECRET_KEY}}
 

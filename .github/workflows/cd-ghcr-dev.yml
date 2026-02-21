@@ -13,15 +13,15 @@ on:
 
 
 jobs:
-  backend_dev:
-    name: backend dev
-    uses: ./.github/workflows/cd-ghcr-callable.yml
-    with: 
-      DOCKER_PATH: ./Backend/Dockerfile
-      target: "development"
-      new-version-tag: ${{ inputs.new-version-tag }}
-      environment: "development"
-      branch: "backend"
+  # backend_dev:
+  #   name: backend dev
+  #   uses: ./.github/workflows/cd-ghcr-callable.yml
+  #   with: 
+  #     DOCKER_PATH: ./Backend/Dockerfile
+  #     target: "development"
+  #     new-version-tag: ${{ inputs.new-version-tag }}
+  #     environment: "development"
+  #     branch: "backend"
 
   frontend_dev:
     name: frontend dev

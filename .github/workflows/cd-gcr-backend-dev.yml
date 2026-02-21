@@ -1,0 +1,36 @@
+name: Build and Push Backend Docker Image to Google Container Registry
+
+on:
+  push:
+    tags: ["v*"]
+    # branches:
+    #   - main
+  workflow_dispatch:
+    inputs:
+      new-version-tag:
+        required: true
+        type: string
+
+jobs:
+  backend-dev:
+    name: backend dev deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:      
+      - uses: actions/checkout@v6
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v3
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+      - uses: RafikFarhad/push-to-gcr-github-action@v5
+        with:
+          # gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text || not needed if you use google-github-actions/auth
+          registry: gcr.io
+          project_id: 596614751180
+          image_name: backend
+          image_tag: latest,${{ inputs.new-version-tag }}
+          dockerfile: ./Backend/Dockerfile
+          context: ./Backend
