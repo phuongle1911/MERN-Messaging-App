@@ -5,8 +5,7 @@ on:
     types: [published]
 
   schedule:
-    - cron: "0 9 1,8,15,22,29 * *"
-
+    - cron: "0 9 * * *"
 
   workflow_dispatch:
 

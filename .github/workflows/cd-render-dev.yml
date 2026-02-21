@@ -1,8 +1,8 @@
-name: Production deploy to Render
+name: Frontend development deploy to Render
 
 on:
   workflow_run:
-    workflows: [Build and push Docker image to GHCR - production]
+    workflows: [Build and push Docker image to GHCR - development]
     types:
       - completed
   workflow_dispatch:
@@ -15,8 +15,8 @@ jobs:
       - name: Deploy to Render
         uses: gh-actions-workflows/deploy-docker-render@v1.3
         with:
-          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK_PROD }}
-          image-url: ghcr.io/phuongle1911/mern-messaging-app-production:latest
+          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK_DEV }}
+          image-url: ghcr.io/phuongle1911/mern-messaging-app-development:latest
           docker-repo-prefix: ghcr.io
           wait-for-deployment: true
           render-api-key: ${{ secrets.RENDER_API_KEY }}
