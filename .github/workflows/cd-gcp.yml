@@ -1,8 +1,8 @@
-name: Deploy to GCP 
+name: Backend deploy to GCP 
 
 on:
   workflow_run:
-    workflows: [Build and push Docker image to GHCR]
+    workflows: [Build and push Docker image to GHCR - development]
     types:
       - completed
   workflow_dispatch:
@@ -23,8 +23,8 @@ jobs:
       - id: 'deploy'
         uses: 'google-github-actions/deploy-cloudrun@v3'
         with:
-          service: 'express-dice-api'
-          # image: 'ghcr.io/alexstormwood/express-dice-api:latest'
+          service: 'messaging-app'
+          image: 'ghcr.io/phuongle1911/mern-messaging-app-backend-development:latest'
           source: "./"
           env_vars: |
             JWT_SECRET=${{secrets.JWT_SECRET_KEY}}
