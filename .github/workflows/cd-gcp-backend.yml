@@ -30,7 +30,6 @@ jobs:
           image: 'us-central1-docker.pkg.dev/mern-messaging-app-487603/message-app-backend-dev/backend-dev:latest'
           env_vars: |
             JWT_SECRET=${{secrets.JWT_SECRET_KEY}}
-            PORT=3000
             NODE_ENV=development
 
       - name: Use output
