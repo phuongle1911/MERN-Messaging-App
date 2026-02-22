@@ -22,4 +22,3 @@ jobs:
       target: "development"
       new-version-tag: ${{ inputs.new-version-tag }}
       environment: "development"
-      branch: "frontend"
