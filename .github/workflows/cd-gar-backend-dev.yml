@@ -13,6 +13,7 @@ on:
 env:
   PROJECT_ID: "mern-messaging-app-487603"
   GAR_REPO: "message-app-backend-dev"
+  IMAGE_NAME: "backend-dev"
   LOCATION: "us-central1"
 
 jobs:
@@ -36,14 +37,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build Docker Image
-        run: docker build -t ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}} --target development ./Backend
+        run: docker build -t ${{env.IMAGE_NAME}} --target development ./Backend
 
       - name: Push Docker Image to GAR
         run: |
           IFS=',' read -ra TAGS <<< "latest,${{ inputs.new-version-tag }}"
           for tag in "${TAGS[@]}"; do
-            docker tag ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}} ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}}:$tag
-            docker push ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}}:$tag
+            docker tag ${{env.IMAGE_NAME}} ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}}/${{env.IMAGE_NAME}}:$tag
+            docker push ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}}/${{env.IMAGE_NAME}}:$tag
           done
         shell: bash
         # uses: a94763075/push-to-gar-github-action@v0.3.1
