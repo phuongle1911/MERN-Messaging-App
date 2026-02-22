@@ -3,7 +3,8 @@ name: Linting code
 on:
   pull_request:
     types: [opened, reopened]
-
+  
+  workflow_dispatch:
 jobs:
   eslint_backend:
     name: eslint backend
