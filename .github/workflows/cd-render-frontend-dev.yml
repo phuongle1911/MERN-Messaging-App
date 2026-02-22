@@ -16,7 +16,7 @@ jobs:
         uses: gh-actions-workflows/deploy-docker-render@v1.3
         with:
           deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK_DEV }}
-          image-url: ghcr.io/phuongle1911/mern-messaging-app-frontend-development:latest
+          image-url: ghcr.io/phuongle1911/mern-messaging-app-development:latest
           docker-repo-prefix: ghcr.io
           wait-for-deployment: true
           render-api-key: ${{ secrets.RENDER_API_KEY }}
