@@ -24,8 +24,7 @@ jobs:
         uses: 'google-github-actions/deploy-cloudrun@v3'
         with:
           service: 'messaging-app-backend-dev'
-          image: 'gcr.io/mern-messaging-app-487603/message-app-backend-dev/backend-dev:latest'
-          # source: "./Backend"
+          image: 'us-central1-docker.pkg.dev/mern-messaging-app-487603/message-app-backend-dev/backend-dev:latest'
           env_vars: |
             JWT_SECRET=${{secrets.JWT_SECRET_KEY}}
 
