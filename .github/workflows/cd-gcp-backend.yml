@@ -28,7 +28,7 @@ jobs:
         with:
           service: 'message-app-backend-dev'
           image: 'us-central1-docker.pkg.dev/mern-messaging-app-487603/message-app-backend-dev/backend-dev:latest'
-          flags: '--port=3000'
+          flags: '--port=3000 "--allow-unauthenticated"'
           env_vars: |
             JWT_SECRET=${{secrets.JWT_SECRET_KEY}}
             NODE_ENV=development
