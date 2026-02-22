@@ -2,7 +2,7 @@ name: Production deploy to Render
 
 on:
   workflow_run:
-    workflows: [Build and push Docker image to GHCR - production]
+    workflows: [Build and push production Docker image to GHCR]
     types:
       - completed
   workflow_dispatch:
