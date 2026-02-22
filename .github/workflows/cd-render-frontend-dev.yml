@@ -2,7 +2,7 @@ name: Frontend development deploy to Render
 
 on:
   workflow_run:
-    workflows: [Build and push Docker image to GHCR - development]
+    workflows: [Build and push Frontend Docker image to GHCR - development]
     types:
       - completed
   workflow_dispatch:

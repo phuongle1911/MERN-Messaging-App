@@ -33,23 +33,3 @@ jobs:
         with:
           config_path: "./eslint.config.mjs"
 
-  # eslint_frontend:
-  #   name: eslint frontend
-  #   if: contains(github.head_ref,'frontend')
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read
-  #     pull-requests: write
-  #   steps:
-  #     - uses: actions/checkout@v6
-  #     - run: npm ci
-  #     - run: cd Frontend/
-  #     - run: npm ci
-  #     - uses: reviewdog/action-eslint@v1.34.0
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         reporter: github-pr-review
-  #         eslint_flags: "Frontend/"
-  #     - uses: tj-actions/eslint-changed-files@v25.3.2
-  #       with:
-  #         config_path: "./eslint.config.mjs"

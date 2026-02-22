@@ -13,7 +13,6 @@ on:
 jobs:
   app_prod:
     name: application production
-    # if: ${{ inputs.environment == 'production' }}
     uses: ./.github/workflows/cd-ghcr-callable.yml
     with:
       DOCKER_PATH: ./Backend/Dockerfile

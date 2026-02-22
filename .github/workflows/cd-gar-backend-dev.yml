@@ -1,4 +1,4 @@
-name: Build and Push Backend Docker Image to GAR
+name: Build and Push Backend Docker Image to GAR - development
 
 on:
   push:
