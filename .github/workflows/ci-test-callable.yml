@@ -1,4 +1,4 @@
-name: Project test callable workflow
+name: Callable workflow - Project test
 
 on:
   workflow_call:

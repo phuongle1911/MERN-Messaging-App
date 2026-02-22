@@ -19,14 +19,6 @@ on:
         required: true
         type: string
       
-      branch:
-        required: true
-        type: string
-
-
-    # secrets:
-    #   jwt_secret_key:
-    #     required: false
 jobs:
   build-image:
     runs-on: ubuntu-latest
@@ -85,8 +77,8 @@ jobs:
           push: true
           file: ${{ inputs.docker_path}}
           tags: |
-            ghcr.io/${{env.REPO_LC}}-${{inputs.branch}}-${{inputs.environment}}:latest
-            ghcr.io/${{env.REPO_LC}}-${{inputs.branch}}-${{inputs.environment}}:${{env.VERSION_TAG}}
+            ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:latest
+            ghcr.io/${{env.REPO_LC}}-${{inputs.environment}}:${{env.VERSION_TAG}}
           target: ${{ inputs.target }}
           provenance: false
 
