@@ -13,8 +13,6 @@ on:
 env:
   PROJECT_ID: "mern-messaging-app-487603"
   GAR_REPO: "message-app-backend-dev"
-  IMAGE_NAME: "backend-dev"
-  REGISTRY: "us-central1-docker.pkg.dev"
   LOCATION: "us-central1"
 
 jobs:
@@ -33,19 +31,19 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2.1.4
 
       - name: Configure Docker Client for Gcloud
-        run: gcloud auth configure-docker gcr.io --quiet
+        run: gcloud auth configure-docker ${{env.LOCATION}}-docker.pkg.dev --quiet
         shell: bash
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build Docker Image
-        run: docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME }} --target development ./Backend
+        run: docker build -t ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}} --target development ./Backend
 
       - name: Push Docker Image to GAR
         run: |
           IFS=',' read -ra TAGS <<< "latest,${{ inputs.new-version-tag }}"
           for tag in "${TAGS[@]}"; do
-            docker tag gcr.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME }} gcr.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME }}:$tag
-            docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME}}:$tag
+            docker tag ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}} ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}}:$tag
+            docker push ${{env.LOCATION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.GAR_REPO}}:$tag
           done
         shell: bash
         # uses: a94763075/push-to-gar-github-action@v0.3.1
