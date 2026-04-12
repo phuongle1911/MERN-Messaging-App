@@ -4,6 +4,13 @@ This is a messaging app, having following features:
 - connect the other users
 - message other users
 
+## CHALLENGES
+
+The challenges and solutions that me and my team came across when building this app:
+- Authentication and Authorisation architecture:  authentication and authorisation are handled on the backend to avoid exposing sensitive data to client side. This increases request overhead, so I used short-lived access tokens stored in HttpOnly cookies, allowing secure and efficient authentication without repeated identity calls from the frontend. 
+- Duplicate chat group: There was issue that duplicate chats were being created when users started new conversations. I fixed this by checking for an existing conversation between the same users before creating a new one, ensuring a single chat history per user group.
+- Containerisation architecture: I separated frontend and backend into different Docker containers so they can be deployed and scaled independently, which is important for scaling backend in the future to handle higher load (e.g. multiple instances) in a real-time messaging app. This way provide each service with its own environment, dependencies and lifecycle, reducing coupling. 
+
 ### INSTALLATION GUIDE
 
 #### Hardware and System Requirements
@@ -37,12 +44,14 @@ Open the terminal and run:
 Once you have a local copy of the project. navigate into the project directory to install the packages and dependencies.
 
 Navigate to frontend project directory:
-
+```
   cd Frontend/
+```
 
 Navigate to backend project directory:
-
-  cd Backend
+```
+  cd Backend/
+```
 -------------------------
 #### 4 - Install Packages and Dependencies
 
